@@ -1,36 +1,85 @@
-これは[Next.js](https://nextjs.org)で構築された`create-next-app`を使ってブートストラップされたプロジェクトです。
+# MID Search
 
-## はじめに
+LINEのユーザーMIDから、プロフィール画像を検索・表示するWebアプリケーションです。
 
-まず、開発サーバーを実行してください：
+## 機能
+
+- **MID入力**: LINEユーザーの一意識別子（MID）を入力
+- **形式検証**: `U`で始まる32桁の16進数形式を自動検証
+- **プロフィール取得**: LINE公開APIからプロフィール画像を取得
+- **プロフィール表示**: LINEアプリでのプロフィール表示に対応
+
+## 技術スタック
+
+- **フレームワーク**: [Next.js](https://nextjs.org) 16.2.1
+- **UI**: React 19.2.4
+- **スタイリング**: Tailwind CSS 4
+- **言語**: TypeScript 5
+- **開発ツール**: ESLint 9
+
+## セットアップ
+
+### 前提条件
+- Node.js 20以上
+- pnpm（またはnpm、yarn、bun）
+
+### インストール
 
 ```bash
-npm run dev
-# または
-yarn dev
-# または
-pnpm dev
-# または
-bun dev
+# 依存パッケージをインストール
+pnpm install
 ```
 
-ブラウザで[http://localhost:3000](http://localhost:3000)を開いて、結果を確認します。
+## 開発
 
-`app/page.tsx`を編集することでページを変更できます。ファイルを編集すると、ページが自動的に更新されます。
+開発サーバーを起動します：
 
-このプロジェクトは[`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts)を使用して、Vercelの新しいフォントファミリーである[Geist](https://vercel.com/font)を自動的に最適化して読み込みます。
+```bash
+pnpm dev
+```
 
-## 詳細情報
+ブラウザで [http://localhost:3000](http://localhost:3000) を開いてアプリケーションを確認します。
 
-Next.jsについてさらに詳しく知りたい場合は、以下のリソースを参照してください：
+- メインページ: [http://localhost:3000](http://localhost:3000)
+- MID検索ページ: [http://localhost:3000/mid-search](http://localhost:3000/mid-search)
 
-- [Next.jsドキュメント](https://nextjs.org/docs) - Next.jsの機能とAPIについて学ぶ
-- [Next.jsを学ぶ](https://nextjs.org/learn) - インタラクティブなNext.jsチュートリアル
+## ビルド
 
-[Next.jsのGitHubリポジトリ](https://github.com/vercel/next.js)もご覧ください。フィードバックと貢献を歓迎します。
+本番用にビルドします：
 
-## Vercelでのデプロイ
+```bash
+pnpm build
+pnpm start
+```
 
-Next.jsアプリをデプロイする最も簡単な方法は、Next.jsの作者による[Vercelプラットフォーム](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme)を使用することです。
+## コマンド
 
-詳細については、[Next.jsのデプロイメントドキュメント](https://nextjs.org/docs/app/building-your-application/deploying)を参照してください。
+| コマンド | 説明 |
+|---------|------|
+| `pnpm dev` | 開発サーバーを起動 |
+| `pnpm build` | 本番用にビルド |
+| `pnpm start` | 本番サーバーを起動 |
+| `pnpm lint` | ESLintで構文チェック |
+
+## 使い方
+
+1. MID検索ページにアクセス
+2. LINEのMID（例: `U00000000000000000000000000000000`）を入力
+3. 「検索」ボタンをクリック
+4. プロフィール画像が表示されます
+5. 「LINEでプロフィールを開く」をクリックするとLINEアプリが起動します
+
+## ファイル構成
+
+```
+app/
+├── page.tsx              # メインページ
+├── mid-search/
+│   └── page.tsx          # MID検索ページ
+├── layout.tsx            # ルートレイアウト
+└── globals.css           # グローバルスタイル
+```
+
+## ライセンス
+
+プライベートプロジェクト

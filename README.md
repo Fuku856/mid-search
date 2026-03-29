@@ -40,9 +40,6 @@ pnpm dev
 
 ブラウザで [http://localhost:3000](http://localhost:3000) を開いてアプリケーションを確認します。
 
-- メインページ: [http://localhost:3000](http://localhost:3000)
-- MID検索ページ: [http://localhost:3000/mid-search](http://localhost:3000/mid-search)
-
 ## ビルド
 
 本番用にビルドします：
@@ -63,21 +60,25 @@ pnpm start
 
 ## 使い方
 
-1. MID検索ページにアクセス
-2. LINEのMID（例: `U00000000000000000000000000000000`）を入力
-3. 「検索」ボタンをクリック
-4. プロフィール画像が表示されます
-5. 「LINEでプロフィールを開く」をクリックするとLINEアプリが起動します
+1. LINEのMID（例: `U00000000000000000000000000000000`）を入力
+2. 「検索」ボタンをクリック（またはEnterキーを押す）
+3. プロフィール画像が表示されます
+4. 「LINEでプロフィールを開く」をクリックするとLINEアプリが起動します
+
+### MID形式について
+
+- `U` で開始
+- 32桁の16進数（0-9, a-f）
+- 例: `U06955dd8eb0a8fb4f43be3e53c0f91b28`
 
 ## ファイル構成
 
 ```
 app/
-├── page.tsx              # メインページ
-├── mid-search/
-│   └── page.tsx          # MID検索ページ
+├── page.tsx              # MID検索メインページ
 ├── layout.tsx            # ルートレイアウト
-└── globals.css           # グローバルスタイル
+├── globals.css           # グローバルスタイル
+└── favicon.ico           # ファビコン
 ```
 
 ## ライセンス

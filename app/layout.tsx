@@ -13,8 +13,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "LINE MID Search",
-  description: "Search for a user using their LINE MID.",
+  title: "MID Search",
+  description:
+    "LINEのユーザーMIDから、プロフィール画像を検索・表示して、プロフィールにアクセスするWebアプリケーション",
+  openGraph: {
+    title: "MID Search",
+    description: "LINEのMIDからプロフィール画像を検索・表示するツール",
+  },
 };
 
 export default function RootLayout({
@@ -24,10 +29,12 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="ja"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col bg-background text-foreground">
+        {children}
+      </body>
     </html>
   );
 }

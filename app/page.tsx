@@ -9,7 +9,7 @@ export default function MidSearch() {
 
   const handleSearch = () => {
     if (!isValidMid(mid)) {
-      alert("midの形式が正しくありません（U + 32桁の16進数）");
+      alert("midの形式が正しくありません（u + 32桁の16進数）");
       return;
     }
     setConfirmed(mid);
@@ -22,7 +22,7 @@ export default function MidSearch() {
           className="flex-1 border rounded px-3 py-2 text-sm"
           value={mid}
           onChange={(e) => setMid(e.target.value.trim())}
-          placeholder="mid を入力（例: Uxxxxxxxx...）"
+          placeholder="mid を入力（例: uxxxxxxxx...）"
           onKeyDown={(e) => e.key === "Enter" && handleSearch()}
         />
         <button

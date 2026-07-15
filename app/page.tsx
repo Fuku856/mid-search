@@ -1,59 +1,23 @@
-"use client";
-import { useState } from "react";
+import MidSearchApp from "@/components/MidSearchApp";
 
-export default function MidSearch() {
-  const [mid, setMid] = useState("");
-  const [confirmed, setConfirmed] = useState<string | null>(null);
-
-  const isValidMid = (v: string) => /^[Uu][0-9a-f]{32}$/.test(v);
-
-  const handleSearch = () => {
-    if (!isValidMid(mid)) {
-      alert("midの形式が正しくありません（u + 32桁の16進数）");
-      return;
-    }
-    setConfirmed(mid);
-  };
-
+export default function Page() {
   return (
-    <div className="flex flex-col items-center gap-4 p-6">
-      <div className="flex gap-2 w-full max-w-md">
-        <input
-          className="flex-1 border rounded px-3 py-2 text-sm"
-          value={mid}
-          onChange={(e) => setMid(e.target.value.trim())}
-          placeholder="mid を入力（例: uxxxxxxxx...）"
-          onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-        />
-        <button
-          className="bg-[#06C755] text-white px-4 py-2 rounded font-bold"
-          onClick={handleSearch}
+    <main className="flex flex-1 flex-col items-center justify-center gap-8 px-4 py-10">
+      <div className="flex flex-col items-center gap-2 text-center">
+        <svg
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          className="h-10 w-10 text-line"
+          aria-hidden="true"
         >
-          検索
-        </button>
+          <path d="M12 2C6.48 2 2 5.94 2 10.8c0 4.36 3.55 8.01 8.35 8.7.32.07.76.21.87.49.1.25.06.65.03.9l-.14.85c-.04.25-.19.98.86.53 1.05-.44 5.68-3.35 7.75-5.73C21.16 14.03 22 12.5 22 10.8 22 5.94 17.52 2 12 2Z" />
+        </svg>
+        <h1 className="text-2xl font-bold">MID Search</h1>
+        <p className="max-w-xs text-sm text-neutral-500 dark:text-neutral-400">
+          LINEのユーザーMIDからプロフィール画像を検索・表示し、プロフィールにアクセスします
+        </p>
       </div>
-
-      {confirmed && (
-        <div className="flex flex-col items-center gap-3 mt-4">
-          <img
-            src={`https://obs.line-apps.com/os/p/${confirmed}`}
-            alt="プロフィール画像"
-            className="w-24 h-24 rounded-full object-cover border"
-            onError={(e) => {
-              e.currentTarget.src = "/default-avatar.png";
-            }}
-          />
-          <a
-            href={`line://nv/profilePopup/mid=${confirmed}`}
-            className="flex items-center gap-2 bg-[#06C755] text-white px-6 py-3 rounded-full font-bold text-sm shadow"
-          >
-            LINEでプロフィールを開く
-          </a>
-          <p className="text-xs text-gray-400 font-mono break-all max-w-xs text-center">
-            {confirmed}
-          </p>
-        </div>
-      )}
-    </div>
+      <MidSearchApp />
+    </main>
   );
 }

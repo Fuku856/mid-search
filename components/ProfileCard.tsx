@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import Image from "next/image";
 import { getLineProfileDeepLink, getLineProfileImageUrl } from "@/lib/line";
 
@@ -12,6 +12,14 @@ type ImageStatus = "loading" | "loaded" | "error";
 
 export default function ProfileCard({ mid }: ProfileCardProps) {
   const [imageStatus, setImageStatus] = useState<ImageStatus>("loading");
+
+  // キャッシュ済み画像はハンドラ登録前に読み込みが完了し、onLoad/onError が
+  // 発火しないことがある。マウント時点の complete/naturalWidth を直接確認して
+  // 画像がスケルトンの裏で透明のまま固まるのを防ぐ。
+  const handleImageRef = useCallback((img: HTMLImageElement | null) => {
+    if (!img || !img.complete) return;
+    setImageStatus(img.naturalWidth > 0 ? "loaded" : "error");
+  }, []);
 
   return (
     <div className="flex w-full flex-col items-center gap-4 rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
@@ -32,6 +40,7 @@ export default function ProfileCard({ mid }: ProfileCardProps) {
           </div>
         ) : (
           <Image
+            ref={handleImageRef}
             src={getLineProfileImageUrl(mid)}
             alt="プロフィール画像"
             width={96}

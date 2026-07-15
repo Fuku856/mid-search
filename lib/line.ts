@@ -1,7 +1,13 @@
-const MID_PATTERN = /^[Uu][0-9a-f]{32}$/;
+// プレフィックスの u と16進数はどちらの大小文字も受理し、normalizeMid で正規化する。
+const MID_PATTERN = /^u[0-9a-f]{32}$/i;
 
 export function isValidMid(value: string): boolean {
   return MID_PATTERN.test(value);
+}
+
+// LINEのCDNパスは小文字を前提とするため、検証済みのMIDを小文字に正規化する。
+export function normalizeMid(value: string): string {
+  return value.trim().toLowerCase();
 }
 
 const LINE_PROFILE_IMAGE_BASE_URL = "https://obs.line-apps.com/os/p";
